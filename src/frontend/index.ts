@@ -106,7 +106,6 @@ function init() {
 	ctx.fillRect(0,0, canvas.width, canvas.height);
 	document.addEventListener('keydown', keydown);
 	gameActive = true;
-	// paintGame(defGameState);
 }
 
 function keydown(e:KeyboardEvent) {

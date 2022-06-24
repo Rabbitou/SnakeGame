@@ -1,5 +1,4 @@
 import { GRID_SIZE } from './constants'
-// import { GameState, Player, Pos } from '../frontend/index'
 
 export type Pos = {
 	x:number,

@@ -2,7 +2,6 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import { gameLoop, getUpdatedVelocity, initGame, GameState } from './game';
 import { FRAME_RATE,GRID_SIZE } from './constants';
-// import { GameState, defGameState } from '../frontend/index';
 import { makeid } from './utils';
 
 const defGameState: GameState = {
@@ -62,17 +61,12 @@ io.on("connection", (socket: Socket) => {
 	let num:number;
 	function handleJoinGame(gameCode: number) {
 		const room:Set<string> | undefined = io.sockets.adapter.rooms.get('' + gameCode);
-		let allUsers;
 		console.log(room?.size);
 		if (!room) {
-			// allUsers = room.sockets;
 			socket.emit('unknownGame');
 			return ;
 		}
 		let numClients:number = room.size;
-		// if (allUsers) {
-		// 	numClients = Object.keys(allUsers).length;
-		// }
 		if (numClients === 0) {
 			socket.emit('unknownGame');
 			return;
@@ -90,8 +84,7 @@ io.on("connection", (socket: Socket) => {
 	}
 
 	function handleNewGame() {
-		// let roomName: number = makeid(5);
-		let roomName: number = 2;
+		let roomName: number = makeid(5);
 		clientRooms.set(socket.id, roomName);
 		socket.emit('gameCode', roomName);
 
@@ -105,7 +98,6 @@ io.on("connection", (socket: Socket) => {
 	function handleKeydown(keyCode: string) {
 		let k:number;
 		const roomName:number = clientRooms.get(socket.id)!;
-		// const roomName = clientRooms[socket.id];
 		try {
 			k = parseInt(keyCode);
 		} catch(e) {
